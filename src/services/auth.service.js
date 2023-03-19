@@ -1,6 +1,7 @@
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+const axios = require("axios");
 
 function generateToken(payload) {
     const privateKey = fs.readFileSync(
@@ -27,7 +28,14 @@ function verifyToken(token) {
     }
 }
 
+function verifyCaptcha(captcha) {
+    const secretKey = process.env.CAPTCHA_SECRET_KEY;
+    const verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captcha}`;
+    return axios.post(verificationUrl);
+}
+
 module.exports = {
     generateToken,
     verifyToken,
+    verifyCaptcha,
 };
