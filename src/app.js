@@ -1,8 +1,13 @@
 const express = require("express");
 const https = require("https");
 const fs = require("fs");
+const addMiddlewares = require("./middlewares/middlewares");
+const addRoutes = require("./routes/routes");
 
 let app = express();
+
+addMiddlewares(app);
+addRoutes(app);
 
 if (process.env.HTTPS === "true") {
     const options = {
