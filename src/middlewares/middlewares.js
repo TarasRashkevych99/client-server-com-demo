@@ -1,4 +1,5 @@
 const bodyParser = require("body-parser");
+const path = require("path");
 const cookieParser = require("cookie-parser");
 const { verifyToken } = require("../services/auth.service");
 
@@ -34,7 +35,7 @@ function addMiddlewares(app) {
                 res.status(401).send("Unauthorized");
             }
         } else {
-            res.sendFile(path.join(__dirname, "../public/index.html"));
+            res.sendFile(path.join(__dirname, "../../public/index.html"));
         }
     });
 }
