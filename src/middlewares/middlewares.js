@@ -12,7 +12,7 @@ function addMiddlewares(app) {
                 .status(401)
                 .send("Invalid client certificate authentication.");
         }
-        return next();
+        next();
     });
     app.use("/api/auth", (req, res, next) => {
         const userName = req.body.userName;
